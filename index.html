@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRC SOCIAL FIX PRO</title>
+  <style>
+    body {
+      margin: 0;
+      background: radial-gradient(circle at top, #001f2f, #000);
+      color: #00ffff;
+      font-family: 'Courier New', monospace;
+      text-align: center;
+      padding: 10px;
+    }
+
+    h1 {
+      padding: 10px;
+      font-size: 1.8rem;
+      text-shadow: 0 0 20px cyan;
+    }
+
+    .box {
+      background: rgba(0,255,255,0.05);
+      margin: 10px auto;
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px cyan;
+      max-width: 500px;
+    }
+
+    select, button, textarea, input {
+      width: 95%;
+      box-sizing: border-box;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 10px;
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      background: black;
+      color: cyan;
+      box-shadow: 0 0 8px cyan;
+      font-size: 1rem;
+    }
+
+    input::placeholder {
+      color: rgba(0, 255, 255, 0.5);
+    }
+
+    button {
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: cyan;
+      color: black;
+      cursor: pointer;
+    }
+
+    .btn-contact {
+      background: #ff0055;
+      color: white;
+      box-shadow: 0 0 10px #ff0055;
+      border-color: #ff0055;
+      margin-top: 20px;
+    }
+
+    .btn-contact:hover {
+      background: white;
+      color: #ff0055;
+    }
+
+    textarea {
+      height: 180px;
+      resize: vertical;
+    }
+
+    .footer {
+      font-size: 12px;
+      color: gray;
+      margin-top: 20px;
+      line-height: 1.5;
+    }
+
+    /* Modal Styling */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.9);
+    }
+
+    .modal-content {
+      background-color: #001f2f;
+      margin: 15% auto;
+      padding: 20px;
+      border: 2px solid cyan;
+      width: 80%;
+      max-width: 400px;
+      border-radius: 15px;
+      box-shadow: 0 0 30px cyan;
+      text-align: left;
+    }
+
+    .modal-content h2 { color: cyan; border-bottom: 1px solid cyan; padding-bottom: 10px; }
+    .modal-content p { font-size: 14px; margin: 15px 0; }
+    .modal-content a { color: #fff; text-decoration: none; display: block; padding: 10px; background: rgba(0,255,255,0.1); margin-bottom: 5px; border-radius: 5px;}
+    .close-modal { float: right; color: cyan; font-size: 28px; font-weight: bold; cursor: pointer; }
+
+    /* Mobile adjustments */
+    @media (max-width: 480px) {
+      h1 { font-size: 1.4rem; }
+      .box { padding: 10px; }
+      button { padding: 10px; font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+
+<h1>TRC SOCIAL FIX 🤖</h1>
+
+<div class="box">
+
+<input type="text" id="identifier" placeholder="Username or Phone Number">
+
+<select id="platform" onchange="updateTypes()">
+  <option value="WhatsApp">WhatsApp</option>
+  <option value="TikTok">TikTok</option>
+  <option value="Facebook">Facebook</option>
+  <option value="Instagram">Instagram</option>
+  <option value="X">X (Twitter)</option>
+</select>
+
+<select id="appealType"></select>
+
+<button onclick="generate()">⚡ Generate Appeal</button>
+
+<textarea id="output" placeholder="Your customized appeal appears here..."></textarea>
+
+<button onclick="copyText()">📋 Copy Text</button>
+<button onclick="sendEmail()">📧 Send Email</button>
+<button onclick="openAppeal()">🌐 Open Official Link</button>
+<button onclick="shareWhatsApp()">📲 Share to WhatsApp</button>
+
+<button class="btn-contact" onclick="toggleModal(true)">🆘 Help / Report Bug</button>
+
+</div>
+
+<!-- Contact Modal -->
+<div id="contactModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal" onclick="toggleModal(false)">&times;</span>
+    <h2>Support & Help</h2>
+    <p>Contact us if you encounter any bugs or issues:</p>
+    <a href="https://wa.me/260763926311">💬 WhatsApp: +260763926311</a>
+    <a href="sms:+260763926311">📱 SMS: +260763926311</a>
+    <a href="tel:+260763926311">📞 Call: +260763926311</a>
+    <a href="https://www.facebook.com/search/top/?q=Trces%20fix" target="_blank">👤 FB: Trces fix</a>
+  </div>
+</div>
+
+<div class="footer">
+  POWERED BY MR TRC ⚡<br>
+  CREDITS TO MR TRC
+</div>
+
+<script>
+const appealOptions = {
+  "WhatsApp": ["Professional Appeal", "Spam Appeal"],
+  "TikTok": ["Creator Appeal", "Content Review"],
+  "Facebook": ["Disabled Appeal"],
+  "Instagram": ["Disabled Appeal"],
+  "X": ["Suspension Appeal"]
+};
+
+// ... Rest of the Javascript content truncated for brevity in this variable, 
+// I will ensure it's all included in the saved file.
+const appeals = {
+  "WhatsApp": {
+    "Professional Appeal": `Dear WhatsApp Support Team,
+
+I am writing to formally request a review of my account ([ID]), which has recently been banned. I was surprised by this action, as I always try to follow WhatsApp’s terms of service and community guidelines. If any of my recent activities were flagged as suspicious, it was not my intention to misuse the platform in any way.
+
+I rely on WhatsApp ([ID]) for important communication with friends, family, and work-related contacts. Losing access has greatly affected my daily activities. I kindly ask your team to review my account and provide clarification regarding the reason for the ban.
+
+If there was any misunderstanding or unintentional violation, I am fully willing to comply with all guidelines moving forward. I respectfully request that you restore my account access.
+
+Thank you for your time and consideration.`,
+    "Spam Appeal": `Dear WhatsApp Team,
+
+I recently noticed that my account ([ID]) was banned due to suspected spam activity. I would like to sincerely clarify that any unusual activity was not intentional. I may have sent multiple messages within a short time, but this was done for communication purposes and not to violate any policies.
+
+WhatsApp ([ID]) is very important to me for both personal and professional communication, and I always aim to use the platform responsibly. If any of my actions were misunderstood, I deeply apologize.
+
+I kindly request your team to review my account activity and reconsider this ban. I am fully committed to following all guidelines moving forward.
+
+Thank you for your time and understanding.`
+  },
+  "TikTok": {
+    "Creator Appeal": `Hello TikTok Team,
+
+I hope you are doing well. I am reaching out regarding my account @[ID], which has recently been suspended or restricted. I was quite surprised by this action, as I always aim to follow TikTok’s community guidelines and create positive, engaging content.
+
+If any of my videos were flagged or misunderstood, I sincerely apologize, as it was never my intention to violate any policies. TikTok is an important platform for me to express creativity and connect with others, and I truly value being part of the community.
+
+I kindly request a review of my account (@[ID]) and the content in question. If there are any issues that need correction, I am more than willing to address them immediately and comply fully with your guidelines.
+
+Thank you for your time and understanding.`,
+    "Content Review": `Hello TikTok Support,
+
+I am writing to request a review of my account (@[ID]) following a recent restriction. I always strive to create content that aligns with TikTok’s community standards and promotes a positive environment.
+
+If any of my posts were flagged, it may have been due to a misunderstanding or unintended error. I sincerely apologize if anything I posted did not meet your guidelines.
+
+I kindly ask for a detailed review of my account (@[ID]) and the affected content. I am fully willing to make any necessary adjustments to ensure compliance with your policies.
+
+Thank you for your support and consideration.`
+  },
+  "Facebook": {
+    "Disabled Appeal": `Dear Facebook Support Team,
+
+I am writing to appeal the disabling of my account ([ID]). I believe this action may have been taken in error, as I have always made an effort to follow Facebook’s community standards and policies.
+
+My account ([ID]) is very important to me, as it helps me stay connected with friends, family, and professional contacts. I have not knowingly engaged in any activities that would violate your terms. If any content or behavior was flagged, it may have been a misunderstanding or an unintended mistake.
+
+I kindly ask your team to review my account and provide further details regarding the issue. I am fully willing to cooperate and take any necessary steps to resolve the situation.
+
+Thank you for your time and consideration, and I hope my account can be restored soon.`
+  },
+  "Instagram": {
+    "Disabled Appeal": `Hello Instagram Support,
+
+I am writing to request a review of my account @[ID], which has recently been disabled. I was surprised by this action, as I always try to follow Instagram’s community guidelines and maintain a positive presence on the platform.
+
+If any of my posts, comments, or activities were flagged, I sincerely apologize, as it was not my intention to violate any rules. Instagram is very important to me for communication, creativity, and sharing moments with others.
+
+I kindly ask your team to review my account (@[ID]) and let me know if there is anything that needs to be corrected. I am more than willing to comply with all guidelines moving forward.
+
+Thank you for your time and support. I look forward to your response.`
+  },
+  "X": {
+    "Suspension Appeal": `Hello X Support Team,
+
+I am writing to appeal the suspension of my account @[ID]. I was surprised by this action and would like to request a detailed review, as I believe this may have been a mistake or misunderstanding.
+
+I always aim to follow the platform rules and engage respectfully with others. If any of my recent posts or activities were flagged, it was not my intention to violate your policies.
+
+My account (@[ID]) is important to me for communication and staying informed, and I would greatly appreciate the opportunity to regain access. I am fully willing to remove any content or adjust my behavior if required.
+
+Thank you for your time and consideration. I hope for a positive resolution.`
+  }
+};
+
+function updateTypes() {
+  let platform = document.getElementById("platform").value;
+  let typeSelect = document.getElementById("appealType");
+  typeSelect.innerHTML = "";
+  appealOptions[platform].forEach(type => {
+    let option = document.createElement("option");
+    option.text = type;
+    typeSelect.add(option);
+  });
+}
+
+function generate() {
+  let platform = document.getElementById("platform").value;
+  let type = document.getElementById("appealType").value;
+  let id = document.getElementById("identifier").value || "[Your Username/Phone]";
+  let msg = appeals[platform][type];
+  let finalMsg = msg.split("[ID]").join(id);
+  document.getElementById("output").value = finalMsg;
+}
+
+function copyText() {
+  let text = document.getElementById("output");
+  if (!text.value) { alert("Please generate an appeal first!"); return; }
+  text.select();
+  text.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  alert("Appeal copied to clipboard!");
+}
+
+function sendEmail() {
+  let message = document.getElementById("output").value;
+  let platform = document.getElementById("platform").value;
+  if (!message) { alert("Generate an appeal first!"); return; }
+  let email = "";
+  if(platform === "WhatsApp") email = "support@whatsapp.com";
+  if(platform === "TikTok") email = "feedback@tiktok.com";
+  if(platform === "Facebook") email = "support@facebook.com";
+  if(platform === "Instagram") email = "support@instagram.com";
+  if(platform === "X") email = "support@twitter.com";
+  window.location.href = `mailto:${email}?subject=Account Appeal&body=${encodeURIComponent(message)}`;
+}
+
+function openAppeal() {
+  let platform = document.getElementById("platform").value;
+  let url = "";
+  if(platform === "WhatsApp") url = "https://www.whatsapp.com/contact";
+  if(platform === "TikTok") url = "https://www.tiktok.com/legal/report/feedback";
+  if(platform === "Facebook") url = "https://www.facebook.com/help";
+  if(platform === "Instagram") url = "https://help.instagram.com";
+  if(platform === "X") url = "https://help.twitter.com";
+  window.open(url, "_blank");
+}
+
+function shareWhatsApp() {
+  let message = document.getElementById("output").value;
+  if (!message) { alert("Generate an appeal first!"); return; }
+  let url = "https://wa.me/?text=" + encodeURIComponent(message);
+  window.open(url, "_blank");
+}
+
+function toggleModal(show) {
+  document.getElementById("contactModal").style.display = show ? "block" : "none";
+}
+
+// Close modal if user clicks outside of it
+window.onclick = function(event) {
+  let modal = document.getElementById("contactModal");
+  if (event.target == modal) { modal.style.display = "none"; }
+}
+
+updateTypes();
+</script>
+
+</body>
+</html>
