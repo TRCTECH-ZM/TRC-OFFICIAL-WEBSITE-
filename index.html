@@ -111,11 +111,83 @@
     .modal-content a { color: #fff; text-decoration: none; display: block; padding: 10px; background: rgba(0,255,255,0.1); margin-bottom: 5px; border-radius: 5px;}
     .close-modal { float: right; color: cyan; font-size: 28px; font-weight: bold; cursor: pointer; }
 
+    /* Floating Action Button (FAB) */
+    .fab {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, #00ffff, #0066ff);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.8), 0 8px 16px rgba(0, 0, 0, 0.4);
+      z-index: 999;
+      transition: all 0.3s ease;
+      font-size: 28px;
+      animation: pulse 2s infinite;
+    }
+
+    .fab:hover {
+      transform: scale(1.15);
+      box-shadow: 0 0 30px rgba(0, 255, 255, 1), 0 12px 24px rgba(0, 0, 0, 0.6);
+    }
+
+    .fab:active {
+      transform: scale(0.95);
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.8), 0 8px 16px rgba(0, 0, 0, 0.4);
+      }
+      50% {
+        box-shadow: 0 0 30px rgba(0, 255, 255, 1), 0 8px 16px rgba(0, 0, 0, 0.4);
+      }
+    }
+
+    .fab-tooltip {
+      position: absolute;
+      background: rgba(0, 0, 0, 0.9);
+      color: cyan;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      white-space: nowrap;
+      right: 90px;
+      bottom: 15px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+      border: 1px solid rgba(0, 255, 255, 0.5);
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    }
+
+    .fab:hover .fab-tooltip {
+      opacity: 1;
+    }
+
     /* Mobile adjustments */
     @media (max-width: 480px) {
       h1 { font-size: 1.4rem; }
       .box { padding: 10px; }
       button { padding: 10px; font-size: 0.9rem; }
+      
+      .fab {
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+      }
+
+      .fab-tooltip {
+        right: 80px;
+        bottom: 10px;
+      }
     }
   </style>
 </head>
@@ -162,6 +234,12 @@
 
 </div>
 
+<!-- Floating Action Button (FAB) -->
+<a href="https://www.mediafire.com/file/gfgics75uy1nus8/TRChelp.apk/file" target="_blank" class="fab">
+  📥
+  <div class="fab-tooltip">Download App</div>
+</a>
+
 <!-- Contact Modal -->
 <div id="contactModal" class="modal">
   <div class="modal-content">
@@ -193,16 +271,16 @@ const appeals = {
   "WhatsApp": {
     "Professional Appeal": `Dear WhatsApp Support Team,
 
-I am writing to formally request a review of my account ([ID]), which has recently been banned. I was surprised by this action, as I always try to follow WhatsApp's terms of service and community guidelines.
+I am writing to formally request a review of my account ([ID]), which has recently been banned. I was surprised by this action, as I always try to follow WhatsApp's terms of service and community guid[...]
 
-I rely on WhatsApp ([ID]) for important communication with friends, family, and work-related contacts. Losing access has greatly affected my daily activities. I kindly ask your team to review my account activity.
+I rely on WhatsApp ([ID]) for important communication with friends, family, and work-related contacts. Losing access has greatly affected my daily activities. I kindly ask your team to review my accou[...]
 
 If there was any misunderstanding or unintentional violation, I am fully willing to comply with all guidelines moving forward. I respectfully request that you restore my account access.
 
 Thank you for your time and consideration.`,
     "Spam Appeal": `Dear WhatsApp Team,
 
-I recently noticed that my account ([ID]) was banned due to suspected spam activity. I would like to sincerely clarify that any unusual activity was not intentional. I may have sent multiple messages, but this was not spam.
+I recently noticed that my account ([ID]) was banned due to suspected spam activity. I would like to sincerely clarify that any unusual activity was not intentional. I may have sent multiple messages,[...]
 
 WhatsApp ([ID]) is very important to me for both personal and professional communication, and I always aim to use the platform responsibly. If any of my actions were misunderstood, I deeply apologize.
 
@@ -213,16 +291,16 @@ Thank you for your time and understanding.`
   "TikTok": {
     "Creator Appeal": `Hello TikTok Team,
 
-I hope you are doing well. I am reaching out regarding my account @[ID], which has recently been suspended or restricted. I was quite surprised by this action, as I always aim to follow TikTok's community guidelines.
+I hope you are doing well. I am reaching out regarding my account @[ID], which has recently been suspended or restricted. I was quite surprised by this action, as I always aim to follow TikTok's commu[...]
 
-If any of my videos were flagged or misunderstood, I sincerely apologize, as it was never my intention to violate any policies. TikTok is an important platform for me to express creativity and connect with others.
+If any of my videos were flagged or misunderstood, I sincerely apologize, as it was never my intention to violate any policies. TikTok is an important platform for me to express creativity and connect[...]
 
-I kindly request a review of my account (@[ID]) and the content in question. If there are any issues that need correction, I am more than willing to address them immediately and comply fully with your standards.
+I kindly request a review of my account (@[ID]) and the content in question. If there are any issues that need correction, I am more than willing to address them immediately and comply fully with your[...]
 
 Thank you for your time and understanding.`,
     "Content Review": `Hello TikTok Support,
 
-I am writing to request a review of my account (@[ID]) following a recent restriction. I always strive to create content that aligns with TikTok's community standards and promotes a positive environment.
+I am writing to request a review of my account (@[ID]) following a recent restriction. I always strive to create content that aligns with TikTok's community standards and promotes a positive environme[...]
 
 If any of my posts were flagged, it may have been due to a misunderstanding or unintended error. I sincerely apologize if anything I posted did not meet your guidelines.
 
@@ -244,9 +322,9 @@ Thank you for your time and consideration, and I hope my account can be restored
   "Instagram": {
     "Disabled Appeal": `Hello Instagram Support,
 
-I am writing to request a review of my account @[ID], which has recently been disabled. I was surprised by this action, as I always try to follow Instagram's community guidelines and maintain a positive presence.
+I am writing to request a review of my account @[ID], which has recently been disabled. I was surprised by this action, as I always try to follow Instagram's community guidelines and maintain a positi[...]
 
-If any of my posts, comments, or activities were flagged, I sincerely apologize, as it was not my intention to violate any rules. Instagram is very important to me for communication, creativity, and staying connected.
+If any of my posts, comments, or activities were flagged, I sincerely apologize, as it was not my intention to violate any rules. Instagram is very important to me for communication, creativity, and s[...]
 
 I kindly ask your team to review my account (@[ID]) and let me know if there is anything that needs to be corrected. I am more than willing to comply with all guidelines moving forward.
 
@@ -259,7 +337,7 @@ I am writing to appeal the suspension of my account @[ID]. I was surprised by th
 
 I always aim to follow the platform rules and engage respectfully with others. If any of my recent posts or activities were flagged, it was not my intention to violate your policies.
 
-My account (@[ID]) is important to me for communication and staying informed, and I would greatly appreciate the opportunity to regain access. I am fully willing to remove any content or adjust my behavior as needed.
+My account (@[ID]) is important to me for communication and staying informed, and I would greatly appreciate the opportunity to regain access. I am fully willing to remove any content or adjust my beh[...]
 
 Thank you for your time and consideration. I hope for a positive resolution.`
   }
