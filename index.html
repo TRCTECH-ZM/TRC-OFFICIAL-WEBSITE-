@@ -875,3 +875,230 @@ initializePricing();
 
 </body>
 </html>
+<section id="trc-ultra">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Courier New', monospace;
+  background: black;
+  color: cyan;
+  overflow-x: hidden;
+}
+
+/* PARTICLES */
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+/* TITLE */
+.trc-title {
+  text-align: center;
+  font-size: 28px;
+  margin: 30px;
+  text-shadow: 0 0 20px cyan;
+}
+
+/* GRID */
+.trc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* CARD */
+.trc-card {
+  background: rgba(0,255,255,0.05);
+  border: 1px solid cyan;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px cyan;
+  transition: 0.3s;
+}
+.trc-card:hover {transform: scale(1.05);}
+
+/* BUTTON */
+.trc-btn {
+  background: cyan;
+  color: black;
+  padding: 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+/* STATS */
+.trc-stats {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.trc-stat {
+  font-size: 25px;
+}
+
+/* CHAT */
+#chatbox {
+  max-width: 400px;
+  margin: auto;
+  background: #001f2f;
+  padding: 10px;
+  border-radius: 10px;
+}
+#messages {height:150px; overflow:auto;}
+input, select {
+  padding: 8px;
+  margin: 5px;
+}
+
+/* ADMIN */
+#adminPanel {display:none; padding:20px;}
+
+/* FLOAT */
+.trc-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: cyan;
+  padding: 15px;
+  border-radius: 50%;
+  color: black;
+}
+</style>
+
+<canvas id="bg"></canvas>
+
+<!-- SERVICES -->
+<div class="trc-title">🔥 TRC SYSTEM</div>
+<div class="trc-grid">
+  <div class="trc-card">
+    <h3>🤖 Bot Setup</h3>
+    <button class="trc-btn" onclick="order('Bot Setup - K30')">Order</button>
+  </div>
+  <div class="trc-card">
+    <h3>🎨 Logo Design</h3>
+    <button class="trc-btn" onclick="order('Logo Design - K40')">Order</button>
+  </div>
+  <div class="trc-card">
+    <h3>📱 Account Fix</h3>
+    <button class="trc-btn" onclick="order('Account Fix - K20')">Fix</button>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="trc-title">📊 LIVE DATA</div>
+<div class="trc-stats">
+  <div class="trc-stat" id="clients">0+</div>
+  <div class="trc-stat" id="fixes">0+</div>
+  <div class="trc-stat" id="orders">0+</div>
+</div>
+
+<!-- AI -->
+<div class="trc-title">🤖 TRC AI</div>
+<div id="chatbox">
+  <div id="messages"></div>
+  <input id="msg" placeholder="Ask TRC AI...">
+  <button onclick="chat()">Send</button>
+</div>
+
+<!-- ORDER TRACKER -->
+<div class="trc-title">📦 TRACK ORDER</div>
+<center>
+<input id="track" placeholder="Enter Code (TRC123)">
+<button onclick="track()">Check</button>
+<p id="status"></p>
+</center>
+
+<!-- ADMIN -->
+<div class="trc-title">🔐 ADMIN</div>
+<center>
+<input type="password" id="pass">
+<button onclick="login()">Login</button>
+</center>
+
+<div id="adminPanel">
+  <h3>Dashboard</h3>
+  <p>Orders: 120</p>
+  <p>Clients: 500</p>
+</div>
+
+<a href="https://wa.me/260763926311" class="trc-float">💬</a>
+
+<script>
+// PARTICLES
+let c=document.getElementById("bg");
+let ctx=c.getContext("2d");
+c.width=window.innerWidth;
+c.height=window.innerHeight;
+let p=[];
+for(let i=0;i<100;i++) p.push({x:Math.random()*c.width,y:Math.random()*c.height});
+
+function draw(){
+  ctx.clearRect(0,0,c.width,c.height);
+  p.forEach(pt=>{
+    pt.y+=0.5;
+    if(pt.y>c.height) pt.y=0;
+    ctx.fillStyle="cyan";
+    ctx.fillRect(pt.x,pt.y,2,2);
+  });
+  requestAnimationFrame(draw);
+}
+draw();
+
+// COUNTERS
+let a=0,b=0,d=0;
+setInterval(()=>{
+  if(a<500) a+=5;
+  if(b<1000) b+=10;
+  if(d<300) d+=3;
+  clients.innerText=a+"+";
+  fixes.innerText=b+"+";
+  orders.innerText=d+"+";
+},50);
+
+// ORDER SYSTEM
+function order(service){
+  let msg="Hello TRC TECH, I want "+service;
+  window.open("https://wa.me/260763926311?text="+encodeURIComponent(msg));
+}
+
+// CHAT AI
+function chat(){
+  let m=document.getElementById("msg").value;
+  let box=document.getElementById("messages");
+  box.innerHTML+="<div>You: "+m+"</div>";
+
+  let r="Contact TRC on WhatsApp 💬";
+  if(m.includes("price")) r="Prices are affordable 💰";
+  if(m.includes("bot")) r="We build powerful bots 🤖";
+  if(m.includes("help")) r="Describe your problem 👨‍💻";
+
+  box.innerHTML+="<div>TRC AI: "+r+"</div>";
+}
+
+// TRACKER
+function track(){
+  let code=document.getElementById("track").value;
+  let s=document.getElementById("status");
+  if(code==="TRC123") s.innerText="Processing...";
+  else if(code==="TRC999") s.innerText="Completed ✅";
+  else s.innerText="Not found ❌";
+}
+
+// ADMIN
+function login(){
+  if(pass.value==="TRC123"){
+    adminPanel.style.display="block";
+  } else alert("Denied");
+}
+</script>
+
+  </section>
+
+</script>
+</html>
