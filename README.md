@@ -6,7 +6,7 @@ Welcome to **TRC TECH** — your destination for cutting-edge technology, fresh 
 
 ## 🌐 Visit Our Website
 
-🖥️ **[Explore TRC Tech Online](https://trctech-zm.github.io/TRC-TECH-co/)**
+🖥️ **[Explore TRC Tech Online](https://trctech-zm.github.io/TRC-OFFICIAL-WEBSITE-/)**
 
 ---
 
