@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRC FIX & TRC TECH</title>
+  <style>
+    /* 3D Background Canvas */
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+    body { margin: 0; font-family: Arial, sans-serif; background: #0b1220; color: #e5e7eb; -webkit-tap-highlight-color: transparent; }
+    header { background: #0f172a; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1f2937; font-size: 14px; }
+    h2 { color: #94a3b8; margin: 20px 20px 10px 20px; font-size: 16px; font-weight: 500; border-left: 3px solid #334155; padding-left: 10px; }
+    .status { padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+    .online { background: #14532d; color: #86efac; }
+    .busy { background: #3f2a00; color: #fbbf24; }
+    .container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; padding: 20px; }
+    .card { background: #111827; border: 1px solid #1f2937; padding: 18px; border-radius: 10px; transition: 0.2s ease; }
+    .card:hover { border-color: #334155; }
+    .card h3 { margin: 0 0 5px 0; font-size: 16px; color: #e2e8f0; }
+    .card p { font-size: 13px; color: #94a3b8; margin: 5px 0; }
+    .card strong { color: #38bdf8; font-weight: 600; }
+    .buttons { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .buttons a { text-decoration: none; padding: 10px 14px; border-radius: 6px; font-size: 13px; background: #1f2937; color: #cbd5e1; border: 1px solid #2d3748; transition: 0.2s; display: inline-block; }
+    .buttons a:hover { background: #334155; color: #fff; }
+    footer { text-align: center; padding: 20px; font-size: 11px; color: #64748b; border-top: 1px solid #1f2937; margin-top: 20px; }
+    
+    @media (max-width: 600px) {
+      .container { grid-template-columns: 1fr; padding: 15px; }
+      header { padding: 10px 15px; font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="bg-canvas"></canvas>
+
+  <header>
+    <div>TRC FIX & TRC TECH</div>
+    <div>24/7</div>
+    <div>By MR TRC</div>
+  </header>
+
+  <header style="margin-top:0px;">
+    <div id="clock">Loading...</div>
+    <div id="status" class="status online">ONLINE</div>
+  </header>
+
+  <h2>💼 SERVICES</h2>
+  <div class="container">
+    <div class="card">
+        <h3>Graphic Design</h3>
+        <p>Flyers, posters, logos</p>
+        <p><strong>K10 - K40</strong></p>
+        <div class="buttons">
+            <a href="https://wa.me/260763926311?text=I%20want%20design">WhatsApp</a>
+            <a href="sms:260763926311?body=I%20want%20design">SMS</a>
+            <a href="mailto:trcfix@gmail.com?subject=Design&body=I%20want%20design">Gmail</a>
+        </div>
+    </div>
+    <div class="card">
+        <h3>Bot Services</h3>
+        <p>WhatsApp automation & tools</p>
+        <p><strong>FREE - K30</strong></p>
+        <div class="buttons">
+            <a href="https://wa.me/260763926311?text=I%20want%20bot">WhatsApp</a>
+            <a href="sms:260763926311?body=I%20want%20bot">SMS</a>
+            <a href="mailto:trcfix@gmail.com?subject=Bot&body=I%20want%20bot">Gmail</a>
+        </div>
+    </div>
+    <div class="card">
+        <h3>Gaming Services</h3>
+        <p>Game setup & optimization</p>
+        <p><strong>K10 - K40</strong></p>
+        <div class="buttons">
+            <a href="https://wa.me/260763926311?text=I%20want%20gaming">WhatsApp</a>
+            <a href="sms:260763926311?body=I%20want%20gaming">SMS</a>
+            <a href="mailto:trcfix@gmail.com?subject=Gaming&body=I%20want%20gaming">Gmail</a>
+        </div>
+    </div>
+    <div class="card">
+        <h3>Tech Services</h3>
+        <p>Fixes, installs, system help</p>
+        <p><strong>K10 - K60</strong></p>
+        <div class="buttons">
+            <a href="https://wa.me/260763926311?text=I%20want%20tech%20help">WhatsApp</a>
+            <a href="sms:260763926311?body=I%20want%20tech%20help">SMS</a>
+            <a href="mailto:trcfix@gmail.com?subject=Tech&body=I%20want%20tech%20help">Gmail</a>
+        </div>
+    </div>
+    <div class="card">
+        <h3>Account Help</h3>
+        <p>Recovery & fixes</p>
+        <p><strong>K10 - K30</strong></p>
+        <div class="buttons">
+            <a href="https://wa.me/260763926311?text=I%20want%20account%20help">WhatsApp</a>
+            <a href="sms:260763926311?body=I%20want%20account%20help">SMS</a>
+            <a href="mailto:trcfix@gmail.com?subject=Account&body=I%20want%20account%20help">Gmail</a>
+        </div>
+    </div>
+    <div class="card">
+        <h3>Learning</h3>
+        <p>Tech training</p>
+        <p><strong>K50 - K90</strong></p>
+        <div class="buttons">
+            <a href="https://wa.me/260763926311?text=I%20want%20learning">WhatsApp</a>
+            <a href="sms:260763926311?body=I%20want%20learning">SMS</a>
+            <a href="mailto:trcfix@gmail.com?subject=Learning&body=I%20want%20learning">Gmail</a>
+        </div>
+    </div>
+    <div class="card">
+        <h3>VIP Membership</h3>
+        <p>Exclusive access & priority service</p>
+        <p><strong>K160</strong></p>
+        <div class="buttons">
+            <a href="https://wa.me/260763926311?text=I%20want%20VIP">WhatsApp</a>
+            <a href="sms:260763926311?body=I%20want%20VIP">SMS</a>
+            <a href="mailto:trcfix@gmail.com?subject=VIP&body=I%20want%20VIP">Gmail</a>
+        </div>
+    </div>
+  </div>
+
+  <h2>🔥 PREMIUM SERVICES</h2>
+  <div class="container">
+    <div class="card">
+        <h3>Advanced WhatsApp Bot</h3>
+        <p><strong>K80 - K110</strong></p>
+        <div class="buttons">
+          <a href="https://wa.me/260763926311?text=Advanced%20Bot">WhatsApp</a>
+        </div>
+    </div>
+    <div class="card">
+        <h3>Website Development</h3>
+        <p><strong>K90 - K110</strong></p>
+        <div class="buttons">
+            <a href="https://wa.me/260763926311?text=Website">WhatsApp</a>
+        </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="card" style="margin: 0 auto; max-width: 400px;">
+      <h3>💡 Suggestion Box</h3>
+      <p>Got an idea to improve TRC FIX & TRC TECH? Send your suggestions below.</p>
+      <div class="buttons" style="justify-content: center;">
+        <a href="mailto:trcesfix@gmail.com?subject=Suggestion%20for%20TRC%20TECH">Gmail</a>
+      </div>
+    </div>
+    <br>
+    POWERED BY MR TRC
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    const canvas = document.getElementById('bg-canvas');
+    if (!canvas) {
+      console.error('Canvas element not found.');
+    } else {
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+        
+        function resize() {
+          const width = window.innerWidth;
+          const height = window.innerHeight;
+          renderer.setSize(width, height);
+          camera.aspect = width / height;
+          camera.updateProjectionMatrix();
+        }
+        window.addEventListener('resize', resize);
+        resize();
+    
+        const geometry = new THREE.BufferGeometry();
+        const count = 3000;
+        const positions = new Float32Array(count * 3);
+        for (let i = 0; i < count * 3; i++) {
+            positions[i] = (Math.random() - 0.5) * 2000;
+        }
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        const material = new THREE.PointsMaterial({ color: 0x38bdf8, size: 2, transparent: true, opacity: 0.8 });
+        const particles = new THREE.Points(geometry, material);
+        scene.add(particles);
+        camera.position.z = 1000;
+    
+        function animate() {
+            requestAnimationFrame(animate);
+            particles.rotation.y += 0.001;
+            particles.rotation.x += 0.0005;
+            renderer.render(scene, camera);
+        }
+        animate();
+    }
+
+    function updateClockAndStatus() {
+      const now = new Date();
+      const clockEl = document.getElementById('clock');
+      if(clockEl) clockEl.textContent = now.toLocaleTimeString();
+      const hours = now.getHours();
+      const status = document.getElementById('status');
+      if (status) {
+          if (hours >= 8 && hours < 22) {
+            status.textContent = 'ONLINE';
+            status.className = 'status online';
+          } else {
+            status.textContent = 'BUSY';
+            status.className = 'status busy';
+          }
+      }
+    }
+    setInterval(updateClockAndStatus, 1000);
+    updateClockAndStatus();
+  </script>
+</body>
+</html>
