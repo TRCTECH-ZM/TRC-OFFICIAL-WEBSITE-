@@ -39,6 +39,184 @@
   </style>
 </head>
 <body>
+<style>
+/* HERO STYLE */
+.hero {
+  height: 100vh;
+  background: linear-gradient(135deg, #020617, #0f172a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  color: #38bdf8;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px #38bdf8, 0 0 20px #38bdf8;
+}
+
+.hero-content h2 {
+  font-size: 1.5rem;
+  margin-top: 10px;
+  color: #a78bfa;
+}
+
+.hero-content p {
+  margin-top: 15px;
+  font-size: 1rem;
+  color: #cbd5f5;
+  line-height: 1.5;
+}
+
+.hero-buttons {
+  margin-top: 25px;
+}
+
+.btn {
+  text-decoration: none;
+  padding: 12px 20px;
+  margin: 5px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: 0.3s ease;
+  display: inline-block;
+}
+
+.primary {
+  background: #38bdf8;
+  color: #020617;
+}
+
+.primary:hover {
+  background: #0ea5e9;
+}
+
+.secondary {
+  border: 1px solid #38bdf8;
+  color: #38bdf8;
+}
+
+.secondary:hover {
+  background: #38bdf8;
+  color: #020617;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .hero-content h2 {
+    font-size: 1.2rem;
+  }
+
+  .hero-content p {
+    font-size: 0.9rem;
+  }
+}
+</style>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>TRC TECH</h1>
+    <h2>FUTURE OF AUTOMATION</h2>
+    <p>
+      Bots • AI • Tech Solutions • Digital Power<br>
+      Smart systems built to make your life easier and faster.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="https://wa.me/260763926311" target="_blank" class="btn primary">
+        💬 Chat on WhatsApp
+      </a>
+      <a href="#services" class="btn secondary">
+        ⚡ View Services
+      </a>
+    </div>
+  </div>
+</section>
+  <script>
+// CHECK SESSION ON LOAD
+window.onload = function () {
+  let user = localStorage.getItem("trc_logged_user");
+  if (user) {
+    showContent(user);
+  }
+};
+
+// REGISTER USER
+function register() {
+  let user = document.getElementById("username").value;
+  let pass = document.getElementById("password").value;
+
+  if (!user || !pass) {
+    alert("Fill all fields");
+    return;
+  }
+
+  if (localStorage.getItem("user_" + user)) {
+    alert("User already exists");
+    return;
+  }
+
+  localStorage.setItem("user_" + user, pass);
+  alert("Registered successfully!");
+}
+
+// LOGIN USER
+function login() {
+  let user = document.getElementById("username").value;
+  let pass = document.getElementById("password").value;
+
+  let storedPass = localStorage.getItem("user_" + user);
+
+  if (storedPass === pass) {
+    localStorage.setItem("trc_logged_user", user);
+    showContent(user);
+  } else {
+    alert("Invalid login");
+  }
+}
+
+// SHOW CONTENT AFTER LOGIN
+function showContent(user) {
+  document.getElementById("authBox").style.display = "none";
+  document.getElementById("protectedContent").style.display = "block";
+  document.getElementById("userInfo").innerText = "Logged in as: " + user;
+}
+
+// LOGOUT
+function logout() {
+  localStorage.removeItem("trc_logged_user");
+  location.reload();
+}
+  </script>
+
+<!-- LOGIN SYSTEM -->
+<div id="authBox">
+  <h2>Login</h2>
+  <input type="text" id="username" placeholder="Username">
+  <input type="password" id="password" placeholder="Password">
+  <button onclick="login()">Login</button>
+  <button onclick="register()">Register</button>
+</div>
+
+<!-- AFTER LOGIN CONTENT -->
+<div id="protectedContent" style="display:none;">
+  <h2>Welcome to TRC TECH</h2>
+  <p id="userInfo"></p>
+  <button onclick="logout()">Logout</button>
+
+  <p style="font-size:12px;">POWERED BY MR TRC</p>
+  <p style="font-size:12px;">CREDITS TO MR TRC</p>
+</div>
+  
   <canvas id="bg-canvas"></canvas>
 
   <header>
